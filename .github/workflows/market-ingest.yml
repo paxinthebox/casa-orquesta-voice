@@ -1,0 +1,222 @@
+# Scheduled market catalog refresh — see scripts/cron/ and README § Whole market.
+#
+# GitHub secrets (Settings → Secrets and variables → Actions):
+#   APIFY_API_TOKEN          — required for full portal scrape
+#   EASYBROKER_API_KEY       — optional CRM/MLS feed
+#
+# GitHub variables (optional):
+#   LISTINGS_URL             — default http://localhost:8002 (docker on runner)
+#                              set to https://your-listings.fly.dev for remote push-only
+#
+# Manual run: Actions → Market ingest → Run workflow → pick mode.
+
+name: Market ingest
+
+on:
+  schedule:
+    # Sunday 09:00 UTC ≈ 03:00 CDMX — full portal + EasyBroker scrape
+    - cron: "0 9 * * 0"
+    # Daily 12:00 UTC ≈ 06:00 CDMX — push cache only (no Apify)
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Ingest mode
+        required: true
+        default: full
+        type: choice
+        options:
+          - full
+          - push-only
+          - easybroker-only
+
+concurrency:
+  group: market-ingest
+  cancel-in-progress: false
+
+jobs:
+  market-weekly-ingest:
+    name: Full market ingest (weekly)
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'full') ||
+      (github.event_name == 'schedule' && github.event.schedule == '0 9 * * 0')
+    env:
+      APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
+      EASYBROKER_API_KEY: ${{ secrets.EASYBROKER_API_KEY }}
+      LISTINGS_URL: ${{ vars.LISTINGS_URL }}
+      MARKET_QUERIES_PATH: data/market_queries.json
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Require Apify token
+        if: env.APIFY_API_TOKEN == ''
+        run: |
+          echo "Set repository secret APIFY_API_TOKEN to enable scheduled portal ingest."
+          exit 1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ingest dependencies
+        run: pip install httpx
+
+      - name: Start catalog stack (Postgres + listings)
+        run: |
+          export LISTINGS_URL="${LISTINGS_URL:-http://localhost:8002}"
+          docker compose up -d postgres listings matching orchestrator
+          for i in $(seq 1 45); do
+            if curl -sf "${LISTINGS_URL}/health" >/dev/null; then
+              echo "listings healthy"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "listings service did not become healthy" >&2
+          docker compose logs listings --tail 40
+          exit 1
+
+      - name: Run whole-market ingest
+        run: |
+          export LISTINGS_URL="${LISTINGS_URL:-http://localhost:8002}"
+          python3 scripts/ingest_market.py
+
+      - name: Push cache and restart catalog
+        run: |
+          export LISTINGS_URL="${LISTINGS_URL:-http://localhost:8002}"
+          chmod +x scripts/pilot/sync_market.sh
+          ./scripts/pilot/sync_market.sh --push-only
+
+      - name: Save cache for daily push
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/cache/market_listings.json
+            data/cache/people_index.json
+            data/cache/market_manifest.json
+          key: market-listings-${{ hashFiles('data/market_queries.json') }}-${{ github.run_id }}
+
+      - name: Upload market cache artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-cache-${{ github.run_id }}
+          path: |
+            data/cache/market_listings.json
+            data/cache/people_index.json
+            data/cache/market_manifest.json
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Upload ingest log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-ingest-failure-${{ github.run_id }}
+          path: data/cache/
+          if-no-files-found: ignore
+
+  market-daily-sync:
+    name: Push catalog from cache (daily)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'push-only') ||
+      (github.event_name == 'schedule' && github.event.schedule == '0 12 * * *')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore latest market cache
+        uses: actions/cache/restore@v4
+        id: market-cache
+        with:
+          path: data/cache
+          key: market-listings-${{ hashFiles('data/market_queries.json') }}-missing
+          restore-keys: |
+            market-listings-${{ hashFiles('data/market_queries.json') }}-
+
+      - name: Verify cache exists
+        run: |
+          if [[ ! -f data/cache/market_listings.json ]]; then
+            echo "No market_listings.json — run weekly ingest first (Actions → Market ingest → full)."
+            exit 1
+          fi
+          python3 -c "import json; d=json.load(open('data/cache/market_listings.json')); print(f'cache rows: {len(d)}')"
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ingest dependencies
+        run: pip install httpx
+
+      - name: Start catalog stack when pushing locally
+        if: vars.LISTINGS_URL == '' || vars.LISTINGS_URL == 'http://localhost:8002'
+        run: |
+          docker compose up -d postgres listings matching orchestrator
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:8002/health && exit 0
+            sleep 2
+          done
+          exit 1
+
+      - name: Push cache to listings API
+        env:
+          APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
+          LISTINGS_URL: ${{ vars.LISTINGS_URL }}
+        run: |
+          export LISTINGS_URL="${LISTINGS_URL:-http://localhost:8002}"
+          python3 scripts/ingest_market.py --push-only
+
+      - name: Restart catalog consumers (local docker)
+        if: vars.LISTINGS_URL == '' || vars.LISTINGS_URL == 'http://localhost:8002'
+        run: docker compose restart listings matching orchestrator
+
+  market-easybroker:
+    name: EasyBroker-only sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'easybroker-only'
+    env:
+      EASYBROKER_API_KEY: ${{ secrets.EASYBROKER_API_KEY }}
+      LISTINGS_URL: ${{ vars.LISTINGS_URL }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Require EasyBroker key
+        if: env.EASYBROKER_API_KEY == ''
+        run: |
+          echo "Set repository secret EASYBROKER_API_KEY."
+          exit 1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ingest dependencies
+        run: pip install httpx
+
+      - name: Start catalog stack
+        run: |
+          export LISTINGS_URL="${LISTINGS_URL:-http://localhost:8002}"
+          docker compose up -d postgres listings matching orchestrator
+          for i in $(seq 1 30); do
+            curl -sf "${LISTINGS_URL}/health" && exit 0
+            sleep 2
+          done
+          exit 1
+
+      - name: Ingest EasyBroker only
+        run: |
+          export LISTINGS_URL="${LISTINGS_URL:-http://localhost:8002}"
+          python3 scripts/ingest_market.py --no-portal
+
+      - name: Restart catalog consumers
+        run: docker compose restart listings matching orchestrator
