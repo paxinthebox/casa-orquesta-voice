@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "apify": {
+      "url": "https://mcp.apify.com/?tools=docs,runs,storage,fetch-actor-details,flax_lump/lamudi-mx-scraper,flax_lump/mercadolibre-inmuebles-mx-scraper,flax_lump/vivanuncios-mx-scraper,azzouzana/inmuebles24-scraper-pro-by-search-url,fatihtahta/propiedades-scraper,thescrapelab/the-ultimate-property-scraper&telemetry-enabled=false"
+    }
+  }
+}

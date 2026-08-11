@@ -1,0 +1,4 @@
+code,tenant_id,label,role,expires_at_iso,notes
+J6SR-PB7J,tnt_pilot_mx,bash-001,buyer,2026-06-20T08:30:01.009311+00:00,
+3F6M-CQYN,tnt_pilot_mx,bash-002,buyer,2026-06-20T08:30:01.009311+00:00,
+DXM3-ZQ5J,tnt_pilot_mx,bash-003,buyer,2026-06-20T08:30:01.009311+00:00,

@@ -1,0 +1,18 @@
+{
+  "name": "lamudi-mx-scraper",
+  "version": "0.1.0",
+  "description": "Lamudi.com.mx SERP scraper — JSON-LD ItemList extraction with MX residential proxy",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test src/parse.test.js"
+  },
+  "dependencies": {
+    "apify": "^3.2.6",
+    "cheerio": "^1.0.0",
+    "crawlee": "^3.12.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

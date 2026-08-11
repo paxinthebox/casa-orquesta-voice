@@ -1,0 +1,13 @@
+{
+  "actorSpecification": 1,
+  "name": "mercadolibre-inmuebles-mx-scraper",
+  "title": "Mercado Libre Inmuebles MX Scraper",
+  "description": "Scrape inmuebles.mercadolibre.com.mx search URLs via polycard SERP HTML. Input: startUrls or startUrl, maxItemsPerUrl, proxyConfiguration.",
+  "version": "0.4",
+  "buildTag": "latest",
+  "meta": {
+    "templateId": "playwright-crawler"
+  },
+  "input": "../input_schema.json",
+  "dockerfile": "../Dockerfile"
+}

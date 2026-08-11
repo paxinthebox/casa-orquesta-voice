@@ -81,20 +81,34 @@ make logs                  # tail all services
 make down                  # stop everything
 make reset                 # nuke volumes and rebuild
 
-# Whole-market inventory (Inmuebles24 portal + optional EasyBroker)
+# Cursor agent helpers (optional): .agents/skills/apify-* + .cursor/mcp.json
+# After pull: Cursor Settings → MCP → enable "apify" → OAuth once.
+# Scoped to our portal Actors only (no Store-wide scrape).
+
+# Whole-market inventory (Inmuebles24 + Vivanuncios portal + optional EasyBroker)
 # 1. Add APIFY_API_TOKEN to .env (https://console.apify.com)
-# 2. Optionally EASYBROKER_API_KEY for your CRM/MLS inventory
-# 3. With backend running:
-make ingest-market          # portal + EasyBroker → listings + people index
+# 2. Portal actors (override in .env if needed):
+#    APIFY_INMUEBLES24_ACTOR=azzouzana/inmuebles24-scraper-pro-by-search-url
+#    APIFY_VIVANUNCIOS_ACTOR=stealth_mode/vivanuncios-property-search-scraper
+#    # Or custom live: make deploy-vivanuncios-actor → INGEST_VIVANUNCIOS_LIVE=1
+#    APIFY_VIVANUNCIOS_BATCH_SIZE=15   # multi-URL Apify runs (also Lamudi/ML live)
+#    INGEST_PORTALS=inmuebles24,vivanuncios
+# 3. Optionally EASYBROKER_API_KEY for your CRM/MLS inventory
+# 4. With backend running:
+make ingest-market          # portals + EasyBroker → listings + people index
+make validate-portals       # colonia pilot (Prados Churubusco) + per-portal validation
 docker compose restart orchestrator listings
 # Edit search regions/types in data/market_queries.json (CDMX + all Morelos municipalities)
+# Colonia-level scrapes (Prados Churubusco, Roma Norte, Santa Fe Lifestyle, …):
+#   data/market_queries_colonias.json
+# Optional per-query override: "searchUrl": "https://www.inmuebles24.com/..."
 ```
 
 ### Whole market in the app
 
 | Layer | Source | What you get |
 |-------|--------|--------------|
-| **Portal** | Inmuebles24 via Apify | Public listings across CDMX + 9 Morelos cities (see `data/market_queries.json`) |
+| **Portal** | Inmuebles24 + Vivanuncios via Apify | Public listings across CDMX boroughs + colonias + Morelos (`data/market_queries.json`, `data/market_queries_colonias.json`). Per-query validation in `market_manifest.json`. |
 | **People from listings** | Publisher/agent on each row | Broker + collaborator cards (deduped) |
 | **Your CRM** | EasyBroker (optional) | Your inventory, team, MLS partners |
 | **Deduped catalog** | Merged + `dedupe.py` | One card per property in the listings service |

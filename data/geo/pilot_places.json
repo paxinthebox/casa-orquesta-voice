@@ -1,0 +1,15 @@
+{
+  "colonias": [
+    {"name": "Periodista", "alias": "periodista", "municipality": "Miguel Hidalgo"},
+    {"name": "Ciudad de los Deportes", "alias": "ciudad de los deportes", "municipality": "Benito Juárez"},
+    {"name": "Prados Churubusco", "alias": "prados churubusco", "municipality": "Coyoacán"}
+  ],
+  "fraccionamientos": [
+    {"name": "Cantarranas", "alias": "cantarranas", "municipality": "Cuernavaca", "state": "Morelos"},
+    {"name": "Sumiya", "alias": "sumiya", "municipality": "Jiutepec", "state": "Morelos"},
+    {"name": "Santa Fe Lifestyle", "alias": "santa fe lifestyle", "municipality": "Xochitepec", "state": "Morelos"}
+  ],
+  "localidades": [
+    {"name": "Alpuyeca", "alias": "alpuyeca", "municipality": "Xochitepec"}
+  ]
+}

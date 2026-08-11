@@ -1,0 +1,106 @@
+[
+  {
+    "city": "Ciudad de México",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "state": "CDMX"
+  },
+  {
+    "city": "Ciudad de México",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "state": "CDMX"
+  },
+  {
+    "scope": "boroughs",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "state": "CDMX"
+  },
+  {
+    "scope": "boroughs",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "state": "CDMX"
+  },
+  {
+    "scope": "state",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state_wide",
+    "searchUrl": "https://www.inmuebles24.com/casas-en-venta-en-morelos-mor.html",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state_wide",
+    "searchUrl": "https://www.inmuebles24.com/departamentos-en-venta-en-morelos-mor.html",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state_wide",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-casas-en-venta/cuernavaca/",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "state": "Morelos",
+    "city": "Cuernavaca"
+  },
+  {
+    "scope": "state_wide",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-departamentos-en-venta/cuernavaca/",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "state": "Morelos",
+    "city": "Cuernavaca"
+  },
+  {
+    "scope": "boroughs",
+    "propertyType": "departamentos",
+    "transactionType": "renta",
+    "state": "CDMX"
+  },
+  {
+    "scope": "boroughs",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "state": "CDMX"
+  },
+  {
+    "scope": "state_wide",
+    "searchUrl": "https://www.inmuebles24.com/departamentos-en-renta-en-morelos-mor.html",
+    "propertyType": "departamentos",
+    "transactionType": "renta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state_wide",
+    "searchUrl": "https://www.inmuebles24.com/casas-en-renta-en-morelos-mor.html",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state",
+    "propertyType": "departamentos",
+    "transactionType": "renta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "state": "Morelos"
+  }
+]

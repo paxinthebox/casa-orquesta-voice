@@ -1,0 +1,198 @@
+x-common-env: &common-env
+  ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+  ANTHROPIC_MODEL_ORCHESTRATOR: ${ANTHROPIC_MODEL_ORCHESTRATOR:-claude-sonnet-4-6}
+  ANTHROPIC_MODEL_DIALOG: ${ANTHROPIC_MODEL_DIALOG:-claude-haiku-4-5-20251001}
+  DEEPGRAM_API_KEY: ${DEEPGRAM_API_KEY:-}
+  ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY:-}
+  ELEVENLABS_VOICE_ID: ${ELEVENLABS_VOICE_ID:-}
+  ELEVENLABS_MODEL: ${ELEVENLABS_MODEL:-eleven_flash_v2_5}
+  ELEVENLABS_OUTPUT_FORMAT: ${ELEVENLABS_OUTPUT_FORMAT:-mp3_44100_128}
+  ELEVENLABS_TRANSPORT: ${ELEVENLABS_TRANSPORT:-rest}
+  STT_LANGUAGE: ${STT_LANGUAGE:-es-MX}
+  TTS_VOICE: ${TTS_VOICE:-}
+  VOICE_WELCOME: ${VOICE_WELCOME:-1}
+  VOICE_WELCOME_MESSAGE: ${VOICE_WELCOME_MESSAGE:-}
+  TTS_PROVIDER: ${TTS_PROVIDER:-elevenlabs}
+  AUTH0_DOMAIN: ${AUTH0_DOMAIN:-}
+  AUTH0_AUDIENCE: ${AUTH0_AUDIENCE:-}
+  TENANT_ID: ${TENANT_ID:-stage-cdmx-morelos}
+  WHATSAPP_SIMULATED: "${WHATSAPP_SIMULATED:-true}"
+  CFDI_PAC_SIMULATED: "${CFDI_PAC_SIMULATED:-true}"
+  MIFIEL_SIMULATED: "${MIFIEL_SIMULATED:-true}"
+  POSTGRES_URL: postgres://casa:casa@postgres:5432/casa
+  REDIS_URL: redis://redis:6379/0
+  S3_ENDPOINT: ${S3_ENDPOINT:-}
+  S3_BUCKET: ${S3_BUCKET:-casa-audit}
+  LANGFUSE_HOST: ${LANGFUSE_HOST:-http://langfuse:3000}
+  SENTRY_DSN: ${SENTRY_DSN:-}
+  PYTHONUNBUFFERED: "1"
+
+x-defaults: &defaults
+  restart: unless-stopped
+  networks: [casa]
+
+services:
+  postgres:
+    <<: *defaults
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: casa
+      POSTGRES_PASSWORD: casa
+      POSTGRES_DB: casa
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports: ["${POSTGRES_PORT:-5432}:5432"]
+
+  redis:
+    <<: *defaults
+    image: redis:7-alpine
+    ports: ["${REDIS_PORT:-6379}:6379"]
+
+  gateway:
+    <<: *defaults
+    image: nginx:1.27-alpine
+    ports: ["${GATEWAY_PORT:-8080}:80"]
+    volumes:
+      - ./services/gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - voice-gateway
+      - orchestrator
+      - listings
+
+  voice-gateway:
+    <<: *defaults
+    build: ./services/voice-gateway
+    ports: ["${VOICE_GATEWAY_PORT:-8010}:8000"]
+    environment:
+      <<: *common-env
+      ORCHESTRATOR_URL: http://orchestrator:8000
+      CO_VOICE_REQUIRE_AUTH: "${CO_VOICE_REQUIRE_AUTH:-0}"
+    # main.py resolves ../_shared relative to /app → /_shared.
+    volumes:
+      - ./services/_shared:/_shared:ro
+      - ./services/voice-gateway:/app
+
+  orchestrator:
+    <<: *defaults
+    build: ./services/orchestrator
+    ports: ["${ORCHESTRATOR_PORT:-8001}:8000"]
+    environment:
+      <<: *common-env
+      LISTINGS_URL: http://listings:8000
+      MATCHING_URL: http://matching:8000
+      SCHEDULING_URL: http://scheduling:8000
+      ROUTING_URL: http://routing:8000
+      DOCUMENTS_URL: http://documents:8000
+      PAYMENTS_URL: http://payments:8000
+      COMMS_URL: http://comms:8000
+      IDENTITY_URL: http://identity:8000
+      PEOPLE_INDEX_PATH: /app/cache/people_index.json
+    # Live-reload service code in stage compose (image still provides deps).
+    volumes:
+      - ./data/cache:/app/cache:ro
+      - ./services/_shared:/_shared:ro
+      - ./services/orchestrator:/app
+
+  identity:
+    <<: *defaults
+    build: ./services/identity
+    ports: ["${IDENTITY_PORT:-8009}:8000"]
+    environment:
+      <<: *common-env
+      IDENTITY_DEV_SEED: "1"
+      IDENTITY_EXPOSE_DEV_CODE: "1"
+      IDENTITY_DEV_INVITE_CODE: "${IDENTITY_DEV_INVITE_CODE:-TEST-BETA}"
+    # jwt_issuer.py resolves ../_shared relative to /app → /_shared.
+    volumes:
+      - ./services/_shared:/_shared:ro
+
+  listings:
+    <<: *defaults
+    build: ./services/listings
+    ports: ["${LISTINGS_PORT:-8002}:8000"]
+    environment:
+      <<: *common-env
+      SEED_PATH: /app/seeds/listings.json
+      MARKET_LISTINGS_CACHE: /app/cache/market_listings.json
+      MARKET_AUTO_LOAD: "1"
+      LISTINGS_PREFER_LIVE: "1"
+    volumes:
+      - ./data/seeds/listings.json:/app/seeds/listings.json:ro
+      - ./data/cache:/app/cache:ro
+      - ./services/_shared:/_shared:ro
+
+  matching:
+    <<: *defaults
+    build: ./services/matching
+    ports: ["${MATCHING_PORT:-8003}:8000"]
+    environment:
+      <<: *common-env
+      LISTINGS_URL: http://listings:8000
+      MATCHING_NEAR_PRICE_FACTOR: "${MATCHING_NEAR_PRICE_FACTOR:-1.5}"
+      MATCHING_NEAR_MIN_RESULTS: "${MATCHING_NEAR_MIN_RESULTS:-3}"
+    volumes:
+      - ./services/_shared:/_shared:ro
+      - ./services/matching:/app
+
+  scheduling:
+    <<: *defaults
+    build: ./services/scheduling
+    ports: ["${SCHEDULING_PORT:-8004}:8000"]
+    environment:
+      <<: *common-env
+      COMMS_URL: http://comms:8000
+
+  routing:
+    <<: *defaults
+    build: ./services/routing
+    ports: ["${ROUTING_PORT:-8008}:8000"]
+    environment:
+      <<: *common-env
+      LISTINGS_URL: http://listings:8000
+      ROUTING_PROVIDER: ${ROUTING_PROVIDER:-haversine}
+      MAPBOX_ACCESS_TOKEN: ${MAPBOX_ACCESS_TOKEN:-}
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:-}
+      TOUR_MAX_STOPS: ${TOUR_MAX_STOPS:-6}
+      TOUR_DWELL_MINUTES: ${TOUR_DWELL_MINUTES:-45}
+      TOUR_TRAVEL_BUFFER_MINUTES: ${TOUR_TRAVEL_BUFFER_MINUTES:-10}
+    volumes:
+      - ./services/_shared:/_shared:ro
+
+  documents:
+    <<: *defaults
+    build: ./services/documents
+    ports: ["${DOCUMENTS_PORT:-8005}:8000"]
+    environment:
+      <<: *common-env
+
+  payments:
+    <<: *defaults
+    build: ./services/payments
+    ports: ["${PAYMENTS_PORT:-8006}:8000"]
+    environment:
+      <<: *common-env
+
+  comms:
+    <<: *defaults
+    build: ./services/comms
+    ports: ["${COMMS_PORT:-8007}:8000"]
+    environment:
+      <<: *common-env
+
+  langfuse:
+    <<: *defaults
+    # Pinned to v2: v3 (:latest) requires a ClickHouse + Redis + S3 stack;
+    # v2 runs on Postgres alone, which is all stage needs.
+    image: langfuse/langfuse:2
+    ports: ["${LANGFUSE_PORT:-3000}:3000"]
+    environment:
+      DATABASE_URL: postgres://casa:casa@postgres:5432/langfuse
+      NEXTAUTH_SECRET: ${LANGFUSE_NEXTAUTH_SECRET:-change-me}
+      NEXTAUTH_URL: http://langfuse:3000
+
+volumes:
+  pg_data:
+
+networks:
+  casa:
+    driver: bridge

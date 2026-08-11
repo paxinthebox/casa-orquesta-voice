@@ -1,0 +1,104 @@
+{
+  "expo": {
+    "name": "Casa·Orquesta",
+    "slug": "casa-orquesta-voice",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "casaorquesta",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "locales": {
+      "es-MX": "./src/locale/expo-es-MX.json",
+      "en-US": "./src/locale/expo-en-US.json"
+    },
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B1426"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "mx.casaorquesta.voice",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Casa·Orquesta usa el micrófono para que puedas hablar con tu asesor de bienes raíces sin escribir. Solo se activa cuando lo decidas tú.",
+        "NSSpeechRecognitionUsageDescription": "Convertimos tu voz a texto para mostrar lo que dijiste y entender lo que buscas. Tus audios no se guardan después de la sesión.",
+        "NSCameraUsageDescription": "Casa·Orquesta puede usar la cámara para verificar identidad o capturar documentos de propiedad cuando tú lo solicites.",
+        "NSUserNotificationsUsageDescription": "Te avisamos cuando tu agente confirma una visita o cuando hay novedades en una propiedad que sigues.",
+        "NSLocationWhenInUseUsageDescription": "Usamos tu ubicación para ordenar visitas y calcular rutas entre propiedades. Solo mientras usas mapas o recorridos.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "mx.casaorquesta.voice",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B1426"
+      },
+      "permissions": [
+        "RECORD_AUDIO",
+        "MODIFY_AUDIO_SETTINGS",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "POST_NOTIFICATIONS",
+        "WAKE_LOCK",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ],
+      "blockedPermissions": [
+        "READ_CONTACTS",
+        "WRITE_CONTACTS",
+        "READ_CALENDAR",
+        "WRITE_CALENDAR",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-splash-screen",
+      "expo-localization",
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Casa·Orquesta usa el micrófono para que puedas hablar con tu asesor de bienes raíces."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#D4A24C",
+          "icon": "./assets/notification-icon.png"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Usamos tu ubicación para ordenar visitas y calcular rutas entre propiedades."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "00000000-0000-0000-0000-000000000000"
+      },
+      "voiceGatewayUrl": "wss://voice.casaorquesta.mx",
+      "orchestratorUrl": "https://api.casaorquesta.mx",
+      "defaultLocale": "es-MX"
+    }
+  }
+}

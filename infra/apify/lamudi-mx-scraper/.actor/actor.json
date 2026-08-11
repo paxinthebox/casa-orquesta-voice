@@ -1,0 +1,13 @@
+{
+  "actorSpecification": 1,
+  "name": "lamudi-mx-scraper",
+  "title": "Lamudi MX Property Scraper",
+  "description": "Scrape lamudi.com.mx search URLs via JSON-LD ItemList. Input: startUrls or startUrl, maxItemsPerUrl, proxyConfiguration.",
+  "version": "0.3",
+  "buildTag": "latest",
+  "meta": {
+    "templateId": "cheerio-crawler"
+  },
+  "input": "../input_schema.json",
+  "dockerfile": "../Dockerfile"
+}

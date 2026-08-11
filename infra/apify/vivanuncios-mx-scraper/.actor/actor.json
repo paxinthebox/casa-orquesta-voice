@@ -1,0 +1,13 @@
+{
+  "actorSpecification": 1,
+  "name": "vivanuncios-mx-scraper",
+  "title": "Vivanuncios MX Property Scraper",
+  "description": "Scrape vivanuncios.com.mx search URLs via Navent PRELOADED_STATE. Input: startUrls or urls, maxItemsPerUrl, proxyConfiguration.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "meta": {
+    "templateId": "cheerio-crawler"
+  },
+  "input": "../input_schema.json",
+  "dockerfile": "../Dockerfile"
+}

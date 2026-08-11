@@ -1,0 +1,8 @@
+{
+  "CFBundleDisplayName": "Casa·Orquesta",
+  "NSMicrophoneUsageDescription": "Casa·Orquesta usa el micrófono para que puedas hablar con tu asesor de bienes raíces sin escribir. Solo se activa cuando lo decidas tú.",
+  "NSSpeechRecognitionUsageDescription": "Convertimos tu voz a texto para mostrar lo que dijiste y entender lo que buscas.",
+  "NSCameraUsageDescription": "Casa·Orquesta puede usar la cámara para verificar identidad o capturar documentos de propiedad cuando tú lo solicites.",
+  "NSUserNotificationsUsageDescription": "Te avisamos cuando tu agente confirma una visita o hay novedades en una propiedad que sigues.",
+  "NSLocationWhenInUseUsageDescription": "Usamos tu ubicación para ordenar visitas y calcular rutas entre propiedades."
+}

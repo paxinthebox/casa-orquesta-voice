@@ -1,0 +1,112 @@
+[
+  {
+    "colonia": "Prados Churubusco",
+    "city": "Coyoacán",
+    "state": "CDMX",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "aliases": ["prados churubusco", "prado churubusco", "prados churubisco"],
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-casas-en-venta/prado-churubusco/v1c1293l13521p1",
+    "lamudiUrl": "https://www.lamudi.com.mx/distrito-federal/coyoacan/prado-churubusco/for-sale/"
+  },
+  {
+    "colonia": "Prados Churubusco",
+    "city": "Coyoacán",
+    "state": "CDMX",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "aliases": ["prados churubusco", "prado churubusco", "prados churubisco"],
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-departamentos-en-venta/prado-churubusco/v1c1294l13521p1",
+    "lamudiUrl": "https://www.lamudi.com.mx/distrito-federal/coyoacan/prado-churubusco/departamento/departamentos/for-sale/"
+  },
+  {
+    "colonia": "Roma Norte",
+    "city": "Cuauhtémoc",
+    "state": "CDMX",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "aliases": ["roma norte", "la roma norte", "roma"],
+    "lamudiCitySlug": "cuauhtemoc",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-casas-en-venta/roma-norte/v1c1293l13669p1"
+  },
+  {
+    "colonia": "Roma Norte",
+    "city": "Cuauhtémoc",
+    "state": "CDMX",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "aliases": ["roma norte", "la roma norte", "roma"],
+    "lamudiCitySlug": "cuauhtemoc",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-departamentos-en-venta/roma-norte/v1c1294l13669p1"
+  },
+  {
+    "colonia": "Condesa",
+    "city": "Cuauhtémoc",
+    "state": "CDMX",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "aliases": ["condesa", "la condesa"],
+    "lamudiCitySlug": "cuauhtemoc",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-casas-en-venta/condesa/v1c1293l13636p1"
+  },
+  {
+    "colonia": "Condesa",
+    "city": "Cuauhtémoc",
+    "state": "CDMX",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "aliases": ["condesa", "la condesa"],
+    "lamudiCitySlug": "cuauhtemoc",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-departamentos-en-venta/condesa/v1c1294l13636p1"
+  },
+  {
+    "colonia": "Polanco",
+    "city": "Miguel Hidalgo",
+    "state": "CDMX",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "aliases": ["polanco"],
+    "lamudiCitySlug": "miguel-hidalgo",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-casas-en-venta/polanco/v1c1293l14319p1"
+  },
+  {
+    "colonia": "Polanco",
+    "city": "Miguel Hidalgo",
+    "state": "CDMX",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "aliases": ["polanco"],
+    "lamudiCitySlug": "miguel-hidalgo",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-departamentos-en-venta/polanco/v1c1294l14319p1"
+  },
+  {
+    "colonia": "Santa Fe Lifestyle",
+    "city": "Xochitepec",
+    "state": "Morelos",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "aliases": [
+      "santa fe lifestyle",
+      "fraccionamiento santa fe lifestyle",
+      "club de golf santa fe",
+      "colinas de santa fe"
+    ],
+    "lamudiSlug": "santa-fe-lifestyle",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-departamentos-en-venta/morelos/santa+fe+lifestyle/v1c1294l1016q0p1"
+  },
+  {
+    "colonia": "Santa Fe Lifestyle",
+    "city": "Xochitepec",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "aliases": [
+      "santa fe lifestyle",
+      "fraccionamiento santa fe lifestyle",
+      "club de golf santa fe",
+      "colinas de santa fe"
+    ],
+    "lamudiSlug": "santa-fe-lifestyle",
+    "vivanunciosUrl": "https://www.vivanuncios.com.mx/s-casas-en-venta/morelos/santa+fe+lifestyle/v1c1293l1016q0p1"
+  }
+]

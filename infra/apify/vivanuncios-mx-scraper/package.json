@@ -1,0 +1,19 @@
+{
+  "name": "vivanuncios-mx-scraper",
+  "version": "0.2.0",
+  "description": "Vivanuncios.com.mx SERP scraper — Playwright + PRELOADED_STATE, multi-URL batch, MX residential proxy",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test src/parse.test.js"
+  },
+  "dependencies": {
+    "apify": "^3.2.6",
+    "cheerio": "^1.0.0",
+    "crawlee": "^3.12.1",
+    "playwright": "^1.49.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

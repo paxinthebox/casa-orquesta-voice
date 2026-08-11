@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: Casa·Orquesta orchestrator evals (simulated harness)
+
+prompts:
+  - "{{message}}"
+
+providers:
+  - id: file://provider.py
+    label: orchestrator-sim
+    config:
+      mode: simulated
+
+  - id: file://provider.py
+    label: orchestrator-live
+    config:
+      mode: live
+
+defaultTest:
+  options:
+    provider: orchestrator-sim
+
+tests: file://generate_tests.py:generate_tests
+
+evaluateOptions:
+  maxConcurrency: 4

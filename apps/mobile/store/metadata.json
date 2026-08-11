@@ -1,0 +1,103 @@
+{
+  "configVersion": 0,
+  "apple": {
+    "info": {
+      "es-MX": {
+        "title": "Casa·Orquesta",
+        "subtitle": "Tu asesor de bienes raíces, por voz",
+        "description": "Casa·Orquesta es un asesor de bienes raíces conversacional que entiende cómo buscas casa hablando, no escribiendo.\n\n· Habla naturalmente — buscamos en CDMX y Morelos.\n· Verificamos títulos, predial y antecedentes antes de que firmes.\n· Agendamos visitas con un solo toque.\n· Cumplimos con LFPDPPP, NOM-151 y CFDI 4.0.\n\nDiseñado en México, para México.",
+        "keywords": [
+          "bienes raíces",
+          "inmobiliaria",
+          "voz",
+          "CDMX",
+          "Morelos",
+          "departamento",
+          "renta",
+          "compra venta",
+          "agente",
+          "asesor"
+        ],
+        "marketingUrl": "https://casaorquesta.mx",
+        "supportUrl": "https://casaorquesta.mx/soporte",
+        "privacyPolicyUrl": "https://casaorquesta.mx/aviso-de-privacidad",
+        "releaseNotes": "Versión inicial de la beta cerrada.\nIncluye búsqueda por voz, verificación de títulos y agendado de visitas en CDMX y Morelos."
+      },
+      "en-US": {
+        "title": "Casa·Orquesta",
+        "subtitle": "Your real-estate advisor, by voice",
+        "description": "Casa·Orquesta is a conversational real-estate advisor that understands how you actually look for a home — by talking, not typing.\n\n· Speak naturally — we search Mexico City and Morelos.\n· We verify titles, property tax, and history before you sign.\n· We book showings with one tap.\n· LFPDPPP, NOM-151, and CFDI 4.0 compliant.\n\nDesigned in Mexico, for Mexico.",
+        "keywords": [
+          "real estate",
+          "voice",
+          "Mexico City",
+          "Morelos",
+          "apartment",
+          "rent",
+          "buy sell",
+          "agent",
+          "advisor"
+        ],
+        "marketingUrl": "https://casaorquesta.mx",
+        "supportUrl": "https://casaorquesta.mx/support",
+        "privacyPolicyUrl": "https://casaorquesta.mx/privacy",
+        "releaseNotes": "Initial closed-beta release.\nIncludes voice search, title verification, and showing scheduling in Mexico City and Morelos."
+      }
+    },
+    "categories": ["lifestyle", "business"],
+    "contentRating": {
+      "violence": "none",
+      "drugsAlcohol": "none",
+      "profanity": "none",
+      "sexualContent": "none",
+      "gambling": "none",
+      "userGeneratedContent": "moderated",
+      "ageRating": "4+"
+    },
+    "advisories": {
+      "containsThirdPartyContent": true,
+      "trackingDescription": "No realizamos tracking publicitario. Recopilamos datos solo para mejorar la calidad del servicio que tú nos pides."
+    },
+    "review": {
+      "firstName": "Operaciones",
+      "lastName": "Casa·Orquesta",
+      "email": "ops@casaorquesta.mx",
+      "phone": "+52 55 0000 0000",
+      "demoAccount": {
+        "username": "beta-reviewer@casaorquesta.mx",
+        "password": "set-via-EAS-secret-APPLE_REVIEW_DEMO_PASSWORD",
+        "notes": "Beta cerrada. La cuenta demo carga propiedades ficticias en Roma Norte. Las llamadas a SAT/RPP/Catastro están mockeadas para reviewers — no hacemos llamadas reales fuera de México."
+      }
+    }
+  },
+  "google": {
+    "info": {
+      "es-MX": {
+        "title": "Casa·Orquesta",
+        "shortDescription": "Asesor de bienes raíces por voz para CDMX y Morelos.",
+        "fullDescription": "Casa·Orquesta entiende cómo buscas casa hablando, no escribiendo.\n\n• Conversación por voz en español mexicano.\n• Búsqueda en tiempo real en CDMX y Morelos.\n• Verificación de títulos, predial y antecedentes ante RPP, Catastro, SAT e INEGI.\n• Agenda de visitas con un toque.\n• Privacidad: cumplimos LFPDPPP, NOM-151 (firma electrónica) y CFDI 4.0.\n\nDiseñado en México, para México."
+      },
+      "en-US": {
+        "title": "Casa·Orquesta",
+        "shortDescription": "Voice-first real-estate advisor for Mexico City and Morelos.",
+        "fullDescription": "Casa·Orquesta understands how you actually look for a home — by talking, not typing.\n\n• Voice conversation in Mexican Spanish.\n• Real-time search in Mexico City and Morelos.\n• Title, property-tax, and history verification against RPP, Catastro, SAT, and INEGI.\n• One-tap showing scheduling.\n• Privacy: LFPDPPP, NOM-151 (advanced electronic signature), and CFDI 4.0 compliant.\n\nDesigned in Mexico, for Mexico."
+      }
+    },
+    "categories": ["business", "lifestyle"],
+    "contentRating": "everyone",
+    "dataSafety": {
+      "dataCollected": [
+        { "type": "voice_recordings",     "purpose": "service_function", "sharedWithThirdParties": true,  "thirdParty": "Deepgram",        "ephemeral": true },
+        { "type": "transcripts",          "purpose": "service_function", "sharedWithThirdParties": true,  "thirdParty": "Anthropic",       "ephemeral": false },
+        { "type": "tts_text",             "purpose": "service_function", "sharedWithThirdParties": true,  "thirdParty": "ElevenLabs/Azure","ephemeral": true },
+        { "type": "phone_number",         "purpose": "authentication",   "sharedWithThirdParties": true,  "thirdParty": "Auth0",           "ephemeral": false },
+        { "type": "device_id",            "purpose": "crash_reporting",  "sharedWithThirdParties": true,  "thirdParty": "Sentry",          "ephemeral": false },
+        { "type": "saved_listings",       "purpose": "service_function", "sharedWithThirdParties": false, "ephemeral": false },
+        { "type": "appointment_history",  "purpose": "service_function", "sharedWithThirdParties": false, "ephemeral": false }
+      ],
+      "encryptedInTransit": true,
+      "encryptedAtRest": true,
+      "dataDeletionRequestUrl": "https://casaorquesta.mx/aviso-de-privacidad#derechos-arco"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+[
+  {
+    "scope": "boroughs",
+    "propertyType": "departamentos",
+    "transactionType": "renta",
+    "state": "CDMX"
+  },
+  {
+    "scope": "boroughs",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "state": "CDMX"
+  },
+  {
+    "scope": "state_wide",
+    "searchUrl": "https://www.inmuebles24.com/departamentos-en-renta-en-morelos-mor.html",
+    "propertyType": "departamentos",
+    "transactionType": "renta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state_wide",
+    "searchUrl": "https://www.inmuebles24.com/casas-en-renta-en-morelos-mor.html",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state",
+    "propertyType": "departamentos",
+    "transactionType": "renta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "state": "Morelos"
+  }
+]

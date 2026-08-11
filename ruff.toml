@@ -1,0 +1,13 @@
+# Casa·Orquesta · Voice — ruff configuration.
+# Matches the codebase's established style (see CLAUDE.md → Style).
+
+target-version = "py311"
+line-length = 100
+
+[lint]
+# Defaults (E4/E7/E9/F) plus our additions, minus rules that conflict
+# with deliberate codebase conventions:
+#   E402 — sys.path injection before `_shared` imports is required by the
+#          services' flat-module layout (each service is its own root).
+#   E701/E702 — compact `if x: return y` guards are used consistently.
+ignore = ["E402", "E701", "E702"]

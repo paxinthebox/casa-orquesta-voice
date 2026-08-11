@@ -1,0 +1,43 @@
+# Casa·Orquesta · Voice — voice-gateway service (Fly.io)
+#
+# WebSocket-heavy. Needs longer timeouts and at least one always-on machine
+# so the first session of the day doesn't pay cold-start.
+
+app = "casa-orquesta-voice-gateway"
+primary_region = "ord"
+kill_signal = "SIGINT"
+kill_timeout = "30s"
+
+[build]
+  dockerfile = "../../services/voice-gateway/Dockerfile"
+
+[env]
+  PORT = "8000"
+  PYTHONUNBUFFERED = "1"
+  ORCHESTRATOR_URL = "http://casa-orquesta-orchestrator.internal:8000"
+  STT_LANGUAGE = "es-MX"
+  TTS_VOICE = "elevenlabs:antoni-multilingual"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "off"          # WS sessions: don't auto-stop
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "10s"
+    grace_period = "15s"
+    method = "GET"
+    path = "/health"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 2                            # WS pumps need more headroom
+  memory = "1024mb"
+
+[deploy]
+  strategy = "rolling"
+  wait_timeout = "5m"                 # WS-aware drain

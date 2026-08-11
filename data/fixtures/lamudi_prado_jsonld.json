@@ -1,0 +1,372 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SearchResultsPage",
+        "url": "https://www.lamudi.com.mx/distrito-federal/coyoacan/prado-churubusco/for-sale/",
+        "breadcrumb": {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Venta",
+              "item": "https://www.lamudi.com.mx/for-sale/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Ciudad de México",
+              "item": "https://www.lamudi.com.mx/distrito-federal/for-sale/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Coyoacán",
+              "item": "https://www.lamudi.com.mx/distrito-federal/coyoacan/for-sale/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Prado Churubusco",
+              "item": "https://www.lamudi.com.mx/distrito-federal/coyoacan/prado-churubusco/for-sale/"
+            }
+          ]
+        },
+        "mainEntity": [
+          {
+            "@type": "ItemList",
+            "@id": "#listings",
+            "name": "Inmuebles en Venta en Prado Churubusco, Coyoacán",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@context": "https://schema.org",
+                  "@type": "Apartment",
+                  "@id": "https://www.lamudi.com.mx/detalle/41032-73-282a1b559-2f33-19db706-81f5-72e5",
+                  "image": "https://img.lamudi.com.mx/eyJidWNrZXQiOiJwcmQtbGlmdWxsY29ubmVjdC1iYWNrZW5kLWIyYi1pbWFnZXMiLCJrZXkiOiJwcm9wZXJ0aWVzLzAxOWRiNmJkLTJlZWEtNzI5Yy04MWFjLTAwMDI4MmExYjUxMC8wMTlkYjZiZi1kODRkLTcyNmQtODllNy00YTg1NTljZWJiYmMuanBnIiwiYnJhbmQiOiJsYW11ZGkiLCJlZGl0cyI6eyJyb3RhdGUiOm51bGwsInJlc2l6ZSI6eyJ3aWR0aCI6MzIwLCJoZWlnaHQiOjI0MCwiZml0IjoiY292ZXIifX19",
+                  "name": "Departamento en Venta en Prado Churubusco",
+                  "description": "¡Vive en Coyoacán!\nDepartamentos nuevos con excelente ubicación, en calle Unicornio ; a 3 min. de Av. Río Churubusco y Calz. de la Viga, a 8 min. de Parque Masayoshi Ohira y Metro Mexicaltzingo ; a 10 min. de Mitikah ️.\n\nDesde 3,490,000.00\n\nCuentan con:\n\n- Cocina equipada ️\n- Sala-comedor ️\n- 2 baños completos\n- Balcón\n- En interior y exterior\n- De 2 y 3 recámaras ️\n- Roof Garden privado\n- En primer nivel ️\n- Diferentes metrajes\n- En zona arbolada y con parques ️\n- Zona 100% habitacional\n- Se aceptan créditos (te apoyamos con todo el proceso del trámite)",
+                  "numberOfBedrooms": 2,
+                  "numberOfBathroomsTotal": 1,
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressRegion": "Ciudad de México",
+                    "addressLocality": "Coyoacán",
+                    "streetAddress": "Osa Menor 107, Prado Churubusco, Ciudad de México, CDMX, México",
+                    "addressCountry": {
+                      "@type": "Country",
+                      "name": "MX"
+                    }
+                  },
+                  "floorSize": {
+                    "@type": "QuantitativeValue",
+                    "value": "55",
+                    "unitCode": "MTK"
+                  },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.3533404",
+                    "longitude": "-99.1268231"
+                  },
+                  "url": "https://www.lamudi.com.mx/detalle/41032-73-282a1b559-2f33-19db706-81f5-72e5",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "3290000",
+                    "priceCurrency": "MXN",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://www.lamudi.com.mx/detalle/41032-73-282a1b559-2f33-19db706-81f5-72e5"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@context": "https://schema.org",
+                  "@type": "RealEstateListing",
+                  "@id": "https://www.lamudi.com.mx/detalle/41032-73-954922afd45e-c52-1993eb3-97c4-7bda",
+                  "image": "https://img.lamudi.com.mx/eyJidWNrZXQiOiJwcmQtbGlmdWxsY29ubmVjdC1iYWNrZW5kLWIyYi1pbWFnZXMiLCJrZXkiOiJwcm9wZXJ0aWVzLzAxOTkzZTZhLTBjMDktN2I5MS05NzdiLTk1NDkyMmFmZDQxNS93YXRlcm1hcmsvMDE5OTNlNzMtMGE0YS03M2JlLWJiOGItYmVlZWU0N2Q1NjFmLmpwZyIsImJyYW5kIjoibGFtdWRpIiwiZWRpdHMiOnsicm90YXRlIjpudWxsLCJyZXNpemUiOnsid2lkdGgiOjMyMCwiaGVpZ2h0IjoyNDAsImZpdCI6ImNvdmVyIn19fQ==",
+                  "name": "Nave Industrial / Bodega en Venta en Prado Churubusco",
+                  "description": "uso de suelo industrial \nUbicada en una zona comercial con alta conectividad, esta nave industrial está construida sobre 650m2 de terreno,\ncontando con 1,500 m2 de construcción en 3 niveles.\n\n13 m2 de frente \n\nTiene oficinas, bodegas, bóveda de seguridad, estacionamiento para 15 autos, diversas áreas de oficinas, privados, un área acondicionada como departamento (4 habitaciones con baño, oficina doble, cocina, baños, sala comedor) área que puede convertirse también en oficinas.\n\nCisterna de 70,000 litros\nTanque de gas\nvarios medidores \nuso de suelo industrial \n\nValor estimado hasta $40 millones de pesos de acuerdo a los valores por m2 en la zona.\n\nAgenda tu cita",
+                  "numberOfBathroomsTotal": 9,
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressRegion": "Ciudad de México",
+                    "addressLocality": "Coyoacán",
+                    "streetAddress": "Osa Menor 206, Prado Churubusco, Ciudad de México, CDMX, México",
+                    "addressCountry": {
+                      "@type": "Country",
+                      "name": "MX"
+                    }
+                  },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.3534921",
+                    "longitude": "-99.122245"
+                  },
+                  "url": "https://www.lamudi.com.mx/detalle/41032-73-954922afd45e-c52-1993eb3-97c4-7bda",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "25000000",
+                    "priceCurrency": "MXN",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://www.lamudi.com.mx/detalle/41032-73-954922afd45e-c52-1993eb3-97c4-7bda"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "@context": "https://schema.org",
+                  "@type": "SingleFamilyResidence",
+                  "@id": "https://www.lamudi.com.mx/detalle/41032-73-8d6cc301abb8-dbd8-1917308-b6da-7e4b",
+                  "image": "https://img.lamudi.com.mx/eyJidWNrZXQiOiJwcmQtbGlmdWxsY29ubmVjdC1iYWNrZW5kLWIyYi1pbWFnZXMiLCJrZXkiOiJpbmdlc3Rlci8wMTkxNzJiZi1kYjhmLTdlMDItYjY5MS04ZDZjYzMwMWFiNmYvYmFkNzM5ZTczOTFhZTg4N2ViNDg3MDM1YjYxMmQwMDgxYjQ5NzE5MDlhMWMyNWMxMDliZTc3YzczYTA0YTdjNi5wbmciLCJicmFuZCI6ImxhbXVkaSIsImVkaXRzIjp7InJvdGF0ZSI6bnVsbCwicmVzaXplIjp7IndpZHRoIjozMjAsImhlaWdodCI6MjQwLCJmaXQiOiJjb3ZlciJ9fX0=",
+                  "name": "Casa en Venta en Prado Churubusco",
+                  "description": "Excelente casa ubicada en una de las alcaldías mas emblemáticas de la ciudad de México.\n\nEsta hermosa casa cuenta con 180m2 de terreno, 369 metros construidos y esta dividido en:\nEstacionamiento para 2 autos \n4 recamaras\nSala\nComedor\nCocina\n3 baños y medio\nÁrea de lavado\nPatio\n\nUbicada cerca de Prados Churubusco, a unas calles de la Cineteca nacional de las artes.\n\nVALOR COMERCIAL:\n$13,923,3280\nVALOR OPORTUNIDAD:\n$5,951,250\n\n- ÚNICAMENTE PAGO DE CONTADO\nExcelente oportunidad de inversión. \nRevisión previa de expediente.\nEl pago se hace directamente a la institución financiera.\nLos precios están sujetos a cambio, sin previo aviso. \nTodo el proceso ante el notario público de su elección.\n\nTe asesoramos hasta la entrega física y legal del inmueble.\n\nAgenda TU cita en nuestra oficina.\n¡LA CALIDAD DE SU FUTURO ESTÁ BASADA EN INVERTIR SABIAMENTE EN EL PRESENTE!\n\nManejamos Inmuebles ubicados en diferentes partes de la República Mexicana, listos \npara tu adquisición. EasyBroker ID: EB-QJ5630",
+                  "numberOfBedrooms": 3,
+                  "numberOfBathroomsTotal": 2,
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressRegion": "Ciudad de México",
+                    "addressLocality": "Coyoacán",
+                    "streetAddress": "Calle Dragón 4-68, Prado Churubusco, Coyoacán, Ciudad de México, 04230, MEX",
+                    "addressCountry": {
+                      "@type": "Country",
+                      "name": "MX"
+                    }
+                  },
+                  "floorSize": {
+                    "@type": "QuantitativeValue",
+                    "value": "369",
+                    "unitCode": "MTK"
+                  },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.356015",
+                    "longitude": "-99.130938"
+                  },
+                  "url": "https://www.lamudi.com.mx/detalle/41032-73-8d6cc301abb8-dbd8-1917308-b6da-7e4b",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "5951250",
+                    "priceCurrency": "MXN",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://www.lamudi.com.mx/detalle/41032-73-8d6cc301abb8-dbd8-1917308-b6da-7e4b"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "@type": "ItemList",
+            "@id": "#pois-section",
+            "name": "Qué encontrarás cerca de estas propiedades",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@type": "EducationalOrganization",
+                  "name": "Diurna Número 35 General Vicente Guerrero",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.355611",
+                    "longitude": "-99.155548"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@type": "Place",
+                  "name": "ENP 6 - Antonio Caso - UNAM",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.352054",
+                    "longitude": "-99.155994"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "@type": "Place",
+                  "name": "CETIS 2 - David Alfaro Siqueiros",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.350249",
+                    "longitude": "-99.156726"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                  "@type": "Place",
+                  "name": "Escuela Secundaria Técnica 17 - Artes Decorativas",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.350313",
+                    "longitude": "-99.157164"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 5,
+                "item": {
+                  "@type": "Place",
+                  "name": "Escuela Secundaria Técnica 64",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.341295",
+                    "longitude": "-99.167987"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 6,
+                "item": {
+                  "@type": "Place",
+                  "name": "CETIS 13 Ricardo Flores Magón",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.340618",
+                    "longitude": "-99.129033"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 7,
+                "item": {
+                  "@type": "Place",
+                  "name": "Colegio de Bachilleres Plantel Del Valle",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.380043",
+                    "longitude": "-99.163447"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 8,
+                "item": {
+                  "@type": "Place",
+                  "name": "Escuela Secundaria Técnica 49 - José Vasconcelos",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.330087",
+                    "longitude": "-99.162906"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 9,
+                "item": {
+                  "@type": "Place",
+                  "name": "Colegio de Bachilleres Plantel 17 Huayamilpas Pedregal",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.321877",
+                    "longitude": "-99.152648"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 10,
+                "item": {
+                  "@type": "Place",
+                  "name": "Escuela Secundaria Técnica 43",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.319613",
+                    "longitude": "-99.126927"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 11,
+                "item": {
+                  "@type": "Place",
+                  "name": "Colegio de Bachilleres Plantel 4 Culhuacán Lázaro Cárdenas",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.323442",
+                    "longitude": "-99.120066"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 12,
+                "item": {
+                  "@type": "Place",
+                  "name": "Universidad Latina",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.335133",
+                    "longitude": "-99.155274"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 13,
+                "item": {
+                  "@type": "Place",
+                  "name": "Universidad Insurgentes - Plantel Sur II",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.37668505",
+                    "longitude": "-99.14039427"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 14,
+                "item": {
+                  "@type": "Place",
+                  "name": "UNITEC - Universidad Tecnologica de México, Campus Sur",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.354802",
+                    "longitude": "-99.116934"
+                  }
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 15,
+                "item": {
+                  "@type": "Place",
+                  "name": "Universidad Icel",
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "19.321471",
+                    "longitude": "-99.137107"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

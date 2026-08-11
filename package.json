@@ -1,0 +1,19 @@
+{
+  "name": "casa-orquesta-voice",
+  "private": true,
+  "description": "Monorepo root — mobile app lives in apps/mobile/",
+  "scripts": {
+    "start": "npm --prefix apps/mobile start --",
+    "mobile": "npm --prefix apps/mobile start",
+    "mobile:clear": "npm --prefix apps/mobile exec -- expo start -c",
+    "mobile:ios": "npm --prefix apps/mobile run ios",
+    "mobile:android": "npm --prefix apps/mobile run android",
+    "eval": "python3 scripts/evals/run_evals.py",
+    "eval:live": "python3 scripts/evals/run_evals.py --live",
+    "eval:promptfoo": "promptfoo eval -c evals/promptfoo/promptfooconfig.yaml",
+    "eval:promptfoo:view": "promptfoo view"
+  },
+  "devDependencies": {
+    "promptfoo": "^0.120.0"
+  }
+}

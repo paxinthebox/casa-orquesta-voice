@@ -1,0 +1,63 @@
+{
+  "title": "Mercado Libre Inmuebles MX search scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Inmuebles search URLs (batch)",
+      "type": "array",
+      "description": "One or more inmuebles.mercadolibre.com.mx list pages for a multi-URL Apify run",
+      "editor": "stringList",
+      "prefill": [
+        "https://inmuebles.mercadolibre.com.mx/departamentos/venta/distrito-federal/coyoacan/"
+      ]
+    },
+    "startUrl": {
+      "title": "Inmuebles search URL (legacy single)",
+      "type": "string",
+      "description": "Verified list page when not using startUrls",
+      "editor": "textfield",
+      "prefill": "https://inmuebles.mercadolibre.com.mx/departamentos/venta/distrito-federal/coyoacan/"
+    },
+    "maxItems": {
+      "title": "Max listings (total)",
+      "type": "integer",
+      "description": "Hard cap across all URLs (default: maxItemsPerUrl × URL count)",
+      "minimum": 1,
+      "maximum": 5000
+    },
+    "maxItemsPerUrl": {
+      "title": "Max listings per URL",
+      "type": "integer",
+      "description": "Maximum listings to return per search URL across its pages",
+      "default": 80,
+      "minimum": 1,
+      "maximum": 500
+    },
+    "maxPages": {
+      "title": "Max pages per URL",
+      "type": "integer",
+      "description": "Safety cap on SERP pagination (_Desde_N)",
+      "default": 10,
+      "minimum": 1,
+      "maximum": 30
+    },
+    "ignore_url_failures": {
+      "title": "Ignore URL failures",
+      "type": "boolean",
+      "description": "Continue other start URLs when one SERP fails",
+      "default": true
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Use Apify residential MX proxy — required for Mercado Libre",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": ["RESIDENTIAL"],
+        "apifyProxyCountry": "MX"
+      }
+    }
+  }
+}

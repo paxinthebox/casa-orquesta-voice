@@ -1,0 +1,75 @@
+{
+  "title": "Vivanuncios MX search scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Search URLs (batch)",
+      "type": "array",
+      "description": "One or more vivanuncios.com.mx list pages. Prefer verified location-id URLs (…/v1c…l…p1).",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.vivanuncios.com.mx/s-casas-en-venta/prado-churubusco/v1c1293l13521p1"
+      ]
+    },
+    "urls": {
+      "title": "Search URLs (store-compat alias)",
+      "type": "array",
+      "description": "Alias for startUrls — same shape as stealth_mode/vivanuncios-property-search-scraper.",
+      "editor": "stringList"
+    },
+    "startUrl": {
+      "title": "Single search URL (legacy)",
+      "type": "string",
+      "description": "Single list URL when not using startUrls/urls",
+      "editor": "textfield"
+    },
+    "maxItems": {
+      "title": "Max listings (total)",
+      "type": "integer",
+      "description": "Hard cap across all URLs (default: maxItemsPerUrl × URL count)",
+      "minimum": 1,
+      "maximum": 5000
+    },
+    "maxItemsPerUrl": {
+      "title": "Max listings per URL",
+      "type": "integer",
+      "description": "Cap per search URL across its pages",
+      "default": 80,
+      "minimum": 1,
+      "maximum": 500
+    },
+    "max_items_per_url": {
+      "title": "Max listings per URL (snake_case alias)",
+      "type": "integer",
+      "description": "Alias for maxItemsPerUrl — same as stealth_mode store actor field",
+      "minimum": 1,
+      "maximum": 500
+    },
+    "maxPages": {
+      "title": "Max pages per URL",
+      "type": "integer",
+      "description": "Safety cap on SERP pagination (…pN)",
+      "default": 10,
+      "minimum": 1,
+      "maximum": 30
+    },
+    "ignore_url_failures": {
+      "title": "Ignore URL failures",
+      "type": "boolean",
+      "description": "Continue other URLs when one SERP fails",
+      "default": true
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Use Apify residential MX proxy — required (Cloudflare blocks datacenter IPs)",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": ["RESIDENTIAL"],
+        "apifyProxyCountry": "MX"
+      }
+    }
+  }
+}

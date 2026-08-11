@@ -1,0 +1,66 @@
+# --- Secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p8
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# --- Node / Expo / RN ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+.expo/
+.expo-shared/
+ios/Pods/
+ios/build/
+android/build/
+android/app/build/
+android/.gradle/
+*.jsbundle
+
+# --- Mobile build artifacts ---
+*.ipa
+*.apk
+*.aab
+
+# --- Local data ---
+*.db
+*.db-journal
+*.sqlite*
+pg_data/
+
+# --- Market ingest cache (rebuild via make ingest-market / CI) ---
+data/cache/*.json
+data/cache/**/*.log
+!data/cache/.gitkeep
+!data/cache/**/.gitkeep
+
+# --- Outputs from local services ---
+services/documents/out/
+services/comms/log/
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+docs/.~lock.*
+~$*
+
+# --- CI cache ---
+.eas/
+.promptfoo/

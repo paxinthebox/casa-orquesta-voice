@@ -1,0 +1,79 @@
+[
+  {
+    "city": "Cuernavaca",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/cuernavaca/for-sale/"
+  },
+  {
+    "city": "Cuernavaca",
+    "state": "Morelos",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/cuernavaca/departamento/departamentos/for-sale/"
+  },
+  {
+    "city": "Jiutepec",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/jiutepec/for-sale/"
+  },
+  {
+    "city": "Jiutepec",
+    "state": "Morelos",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/jiutepec/departamento/departamentos/for-sale/"
+  },
+  {
+    "city": "Temixco",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/temixco/for-sale/"
+  },
+  {
+    "city": "Temixco",
+    "state": "Morelos",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/temixco/departamento/departamentos/for-sale/"
+  },
+  {
+    "city": "Cuautla",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/cuautla/for-sale/"
+  },
+  {
+    "city": "Emiliano Zapata",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/emiliano-zapata/for-sale/"
+  },
+  {
+    "city": "Xochitepec",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/xochitepec/for-sale/"
+  },
+  {
+    "city": "Yautepec",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/yautepec/for-sale/"
+  },
+  {
+    "city": "Tepoztlán",
+    "state": "Morelos",
+    "propertyType": "casas",
+    "transactionType": "venta",
+    "lamudiUrl": "https://www.lamudi.com.mx/morelos/tepoztlan/for-sale/"
+  }
+]

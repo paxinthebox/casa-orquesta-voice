@@ -1,0 +1,44 @@
+[
+  {
+    "city": "Gustavo A. Madero",
+    "state": "CDMX",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "scope": "borough"
+  },
+  {
+    "city": "Iztacalco",
+    "state": "CDMX",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "scope": "borough"
+  },
+  {
+    "city": "La Magdalena Contreras",
+    "state": "CDMX",
+    "propertyType": "departamentos",
+    "transactionType": "venta",
+    "scope": "borough"
+  },
+  {
+    "city": "Tlalpan",
+    "state": "CDMX",
+    "propertyType": "departamentos",
+    "transactionType": "renta",
+    "scope": "borough"
+  },
+  {
+    "city": "Iztapalapa",
+    "state": "CDMX",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "scope": "borough"
+  },
+  {
+    "city": "La Magdalena Contreras",
+    "state": "CDMX",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "scope": "borough"
+  }
+]

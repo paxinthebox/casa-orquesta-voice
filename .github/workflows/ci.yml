@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: verify.sh (lint + tests + typecheck)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: apps/mobile/package-lock.json
+
+      - name: Bootstrap (install all deps)
+        run: |
+          chmod +x scripts/bootstrap.sh scripts/verify.sh
+          ./scripts/bootstrap.sh
+
+      - name: Run the canonical verify gate
+        run: ./scripts/verify.sh
+
+      - name: Upload coverage on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-output
+          path: |
+            **/coverage.xml
+            **/test-output.xml
+            STUCK.md
+          if-no-files-found: ignore
+
+  contract-check:
+    name: Behavior contract — 161+ assertions
+    runs-on: ubuntu-latest
+    needs: verify
+    if: always() && needs.verify.result == 'success'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install orchestrator deps
+        run: |
+          pip install -r services/orchestrator/requirements.txt || true
+
+      - name: Run the behavior contract
+        run: |
+          if [ -f services/orchestrator/tests/test_agents.py ]; then
+            python3 services/orchestrator/tests/test_agents.py
+          else
+            echo "test_agents.py not yet ported — see TASK_PROMPTS.md P1.3"
+            echo "(this step will become required once P1.3 lands)"
+          fi

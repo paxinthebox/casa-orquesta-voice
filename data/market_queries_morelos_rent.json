@@ -1,0 +1,14 @@
+[
+  {
+    "scope": "state",
+    "propertyType": "departamentos",
+    "transactionType": "renta",
+    "state": "Morelos"
+  },
+  {
+    "scope": "state",
+    "propertyType": "casas",
+    "transactionType": "renta",
+    "state": "Morelos"
+  }
+]

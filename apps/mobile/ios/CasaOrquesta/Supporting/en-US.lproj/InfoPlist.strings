@@ -1,0 +1,5 @@
+CFBundleDisplayName = "Casa·Orquesta";
+NSMicrophoneUsageDescription = "Casa·Orquesta uses the microphone so you can talk to your real-estate advisor instead of typing. It only turns on when you tap to speak.";
+NSSpeechRecognitionUsageDescription = "We turn your voice into text so you can see what you said and we can understand what you're looking for.";
+NSCameraUsageDescription = "Casa·Orquesta may use the camera to verify identity or capture property documents when you request it.";
+NSUserNotificationsUsageDescription = "We notify you when an agent confirms a showing or there's an update on a property you follow.";
