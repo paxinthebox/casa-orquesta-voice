@@ -9,8 +9,10 @@ Backend: Redis when REDIS_URL is set; in-memory dict fallback. The fallback
 is per-process so a multi-worker deployment NEEDS Redis; this is logged.
 
 Default per-million-token prices (USD), tunable via env:
-  Sonnet 4.6:   input $3.00 / output $15.00
-  Haiku 4.5:    input $0.80 / output $4.00
+  DeepSeek V4 Pro (Fireworks):  input $1.74 / output $3.48
+  DeepSeek V4 Flash (Fireworks): input $0.22 / output $0.66
+  Sonnet 4.6 (legacy):          input $3.00 / output $15.00
+  Haiku 4.5 (legacy):           input $0.80 / output $4.00
 
 This module is read by Agent.run() before each `messages.create()` call
 (via `should_call_llm()`) and again after the response to record cost
@@ -28,16 +30,20 @@ REDIS_NS = os.getenv("REDIS_NAMESPACE", "casa:spend")
 
 PRICE_TABLE = {
     # ($/M input, $/M output)
+    # --- Anthropic (via Anthropic API) ---
     "claude-sonnet-4-6":        (3.00, 15.00),
     "claude-sonnet-4-5":        (3.00, 15.00),
     "claude-haiku-4-5":         (0.80,  4.00),
     "claude-haiku-4-5-20251001": (0.80, 4.00),
     "claude-opus-4-6":          (15.00, 75.00),
+    # --- DeepSeek via Fireworks (serverless, verified 2026-08-25) ---
+    "accounts/fireworks/models/deepseek-v4-flash-0731": (0.22, 0.66),
+    "accounts/fireworks/models/deepseek-v4-pro":        (1.74, 3.48),
 }
 
 
 def _price_per_million(model: str) -> tuple[float, float]:
-    return PRICE_TABLE.get(model, (3.00, 15.00))
+    return PRICE_TABLE.get(model, (1.74, 3.48))  # default: deepseek-v4-pro rate
 
 
 def _today_utc() -> str:

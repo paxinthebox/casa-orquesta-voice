@@ -46,11 +46,11 @@ Detalles confirmados de la doc de Fireworks:
 
 ## Pasos de ejecución
 
-- [ ] Obtener API key de Fireworks para casa-orquesta (Dario/Paco).
-- [ ] Confirmar tarifa de deepseek-v4-flash-0731 en vivo → actualizar `spend_caps.py`.
-- [ ] Cambiar defaults en `agents/realestate.py`, `locator.py`, `audit.py` y `.env.example` al resource name de Fireworks, con `ANTHROPIC_BASE_URL`.
+- [x] Obtener API key de Fireworks para casa-orquesta (Dario/Paco).
+- [x] Confirmar tarifa de deepseek-v4-flash-0731 en vivo → actualizar `spend_caps.py`.
+- [x] Cambiar defaults en `agents/realestate.py` (→ deepseek-v4-pro), `locator.py`, `audit.py` (→ deepseek-v4-flash-0731) y `.env.example` con `ANTHROPIC_BASE_URL`.
 - [ ] Implementar Fase 1 del harness (wiring real del SDK) ya apuntando a Fireworks.
-- [ ] `make eval` + spot-check es-MX → decidir si el orquestador también baja (o mantener sonnet solo ahí).
+- [ ] `make eval` + spot-check es-MX → decidir si el orquestador también baja (o mantener Pro solo ahí).
 
 ## Archivos relevantes
 

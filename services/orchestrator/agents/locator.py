@@ -18,7 +18,7 @@ from tools.people_tools import find_buyers as _h_find_buyers
 from tools.people_tools import find_collaborator_agents as _h_find_collaborator_agents
 from tools.people_tools import find_brokers as _h_find_brokers
 
-MODEL_DIALOG = os.getenv("ANTHROPIC_MODEL_DIALOG", "claude-haiku-4-5-20251001")
+MODEL_DIALOG = os.getenv("ANTHROPIC_MODEL_DIALOG", "accounts/fireworks/models/deepseek-v4-flash-0731")
 
 
 # ---------------- Tool descriptors ----------------

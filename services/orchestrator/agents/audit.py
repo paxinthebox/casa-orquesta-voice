@@ -23,7 +23,7 @@ from tools.audit_tools import (
 from tools.listings_tools import get_listing as _h_get_listing
 import datasets
 
-MODEL_DIALOG = os.getenv("ANTHROPIC_MODEL_DIALOG", "claude-haiku-4-5-20251001")
+MODEL_DIALOG = os.getenv("ANTHROPIC_MODEL_DIALOG", "accounts/fireworks/models/deepseek-v4-flash-0731")
 
 
 # ---------------- Tool descriptors ----------------
