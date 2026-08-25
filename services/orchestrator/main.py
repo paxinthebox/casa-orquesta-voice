@@ -34,7 +34,7 @@ from people_intent import resolve_people_filters
 
 ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY", "").strip()
 USE_REAL_AI = bool(ANTHROPIC_KEY)
-MODEL_ORCHESTRATOR = os.getenv("ANTHROPIC_MODEL_ORCHESTRATOR", "accounts/fireworks/models/deepseek-v4-pro")
+MODEL_ORCHESTRATOR = os.getenv("ANTHROPIC_MODEL_ORCHESTRATOR", "accounts/fireworks/models/minimax-m3")
 MODEL_DIALOG = os.getenv("ANTHROPIC_MODEL_DIALOG", "accounts/fireworks/models/deepseek-v4-flash-0731")
 
 app = FastAPI(title="Casa·Orquesta Orchestrator", version="0.2.0")

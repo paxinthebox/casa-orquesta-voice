@@ -1,18 +1,18 @@
-# Plan — Migración de modelos a deepseek v4 flash
+# Plan — Migración de modelos a Fireworks AI
 
-**Estado:** decisión de Dario (2026-08-23): usar **deepseek v4 flash**. Ruta técnica verificada en vivo (docs de Fireworks).
+**Estado:** decisión actualizada (2026-08-25): orquestador → **MiniMax M3** ($0.30/$1.20 por M), dialog → **DeepSeek V4 Flash** ($0.22/$0.66 por M). Verificado en vivo con tool use + es-MX. Ruta técnica confirmada contra docs de Fireworks.
 **Principio:** el cambio de modelo es **casi gratis en código** — todo está detrás de env vars. El trabajo real es conectar el proveedor, correr evals y validar calidad/latencia es-MX.
 
 ## Estado actual (verificado en código)
 
 | Rol | Agente | Modelo actual | Env var |
 |-----|--------|---------------|---------|
-| Orquestador (conversación principal) | `realestate.py` | `claude-sonnet-4-6` | `ANTHROPIC_MODEL_ORCHESTRATOR` |
-| Diálogo de soporte (búsqueda + auditoría) | `locator.py`, `audit.py` | `claude-haiku-4-5-20251001` | `ANTHROPIC_MODEL_DIALOG` |
+| Orquestador (conversación principal) | `realestate.py` | `accounts/fireworks/models/minimax-m3` | `ANTHROPIC_MODEL_ORCHESTRATOR` |
+| Diálogo de soporte (búsqueda + auditoría) | `locator.py`, `audit.py` | `accounts/fireworks/models/deepseek-v4-flash-0731` | `ANTHROPIC_MODEL_DIALOG` |
 
-- Precios usados por spend caps: sonnet-4-6 $3.00/$15.00 por M, haiku-4-5 $0.80/$4.00 por M.
-- El harness es **Claude Agent SDK** (`harness.py`) — ojo: hoy es esqueleto; `run_stream` aún lanza `NotImplementedError` (Phase 1 de PLAN.md). La migración de modelo se hace al construir la Fase 1.
-- Los modelos viven en `agents/*.py` por env vars con default Anthropic.
+- Precios usados por spend caps: M3 $0.30/$1.20 por M, Flash $0.22/$0.66 por M (verificado en vivo 2026-08-25).
+- El harness real es `agents/__init__.py::_run_real` (NO harness.py — ese es esqueleto orphaned). El tool-use loop ya funciona contra Fireworks. Validado con live test.
+- Los modelos viven en `agents/*.py` por env vars con defaults de Fireworks.
 
 ## Decisión y ruta técnica (verificada en vivo, 2026-08-23)
 
@@ -47,15 +47,19 @@ Detalles confirmados de la doc de Fireworks:
 ## Pasos de ejecución
 
 - [x] Obtener API key de Fireworks para casa-orquesta (Dario/Paco).
-- [x] Confirmar tarifa de deepseek-v4-flash-0731 en vivo → actualizar `spend_caps.py`.
-- [x] Cambiar defaults en `agents/realestate.py` (→ deepseek-v4-pro), `locator.py`, `audit.py` (→ deepseek-v4-flash-0731) y `.env.example` con `ANTHROPIC_BASE_URL`.
-- [ ] Implementar Fase 1 del harness (wiring real del SDK) ya apuntando a Fireworks.
-- [ ] `make eval` + spot-check es-MX → decidir si el orquestador también baja (o mantener Pro solo ahí).
+- [x] Confirmar tarifas en vivo → actualizar `spend_caps.py` (M3, Glimmer, V4 Pro, V4 Flash).
+- [x] Cambiar defaults: orquestador → MiniMax M3, dialog → DeepSeek V4 Flash, en `agents/*.py`, `main.py`, `.env.example`, `.env`, `fly.orchestrator.toml`.
+- [x] Live test: tool use + usage + es-MX validado contra Fireworks (M3 3/3 casos, Glimmer 1/3).
+- [x] Fixes de review (atlas): over-bill fallback, stale defaults, zero-usage guard.
+- [ ] `make eval` + spot-check es-MX (161 assertions contract).
+- [ ] Refactor streaming: first-call stream (elimina double-billing de _stream_final_text).
+- [ ] Deploy a Fly.io (pendiente credenciales de Paco).
 
 ## Archivos relevantes
 
 - `services/orchestrator/agents/realestate.py`, `locator.py`, `audit.py`
+- `services/orchestrator/agents/__init__.py` (real AI path: `_run_real`)
 - `services/orchestrator/hooks/spend_caps.py`
-- `services/orchestrator/harness.py`
-- `.env.example`
+- `services/orchestrator/main.py`
+- `.env.example`, `infra/fly/fly.orchestrator.toml`
 - `docs/ARCHITECTURE.md` (cost shape), `docs/HANDOFF.md` (regla >$20/mes), `evals/`

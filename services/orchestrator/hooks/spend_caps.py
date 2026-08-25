@@ -9,6 +9,8 @@ Backend: Redis when REDIS_URL is set; in-memory dict fallback. The fallback
 is per-process so a multi-worker deployment NEEDS Redis; this is logged.
 
 Default per-million-token prices (USD), tunable via env:
+  MiniMax M3 (Fireworks):      input $0.30 / output $1.20
+  Muse Glimmer 30B (Fireworks): input $0.35 / output $1.50
   DeepSeek V4 Pro (Fireworks):  input $1.74 / output $3.48
   DeepSeek V4 Flash (Fireworks): input $0.22 / output $0.66
   Sonnet 4.6 (legacy):          input $3.00 / output $15.00
@@ -39,6 +41,8 @@ PRICE_TABLE = {
     # --- DeepSeek via Fireworks (serverless, verified 2026-08-25) ---
     "accounts/fireworks/models/deepseek-v4-flash-0731": (0.22, 0.66),
     "accounts/fireworks/models/deepseek-v4-pro":        (1.74, 3.48),
+    "accounts/fireworks/models/minimax-m3":             (0.30, 1.20),
+    "accounts/fireworks/models/muse-glimmer-30b":       (0.35, 1.50),
 }
 
 def _price_per_million(model: str) -> tuple[float, float]:

@@ -27,7 +27,7 @@ from .locator import locator_agent
 from .audit import audit_agent
 from .guardrails import orchestrator_system, idle_orchestrator_reply
 
-MODEL_ORCHESTRATOR = os.getenv("ANTHROPIC_MODEL_ORCHESTRATOR", "accounts/fireworks/models/deepseek-v4-pro")
+MODEL_ORCHESTRATOR = os.getenv("ANTHROPIC_MODEL_ORCHESTRATOR", "accounts/fireworks/models/minimax-m3")
 
 
 def _agent_as_tool(child: Agent) -> Tool:
