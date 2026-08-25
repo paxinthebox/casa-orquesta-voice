@@ -41,9 +41,9 @@ PRICE_TABLE = {
     "accounts/fireworks/models/deepseek-v4-pro":        (1.74, 3.48),
 }
 
-
 def _price_per_million(model: str) -> tuple[float, float]:
-    return PRICE_TABLE.get(model, (1.74, 3.48))  # default: deepseek-v4-pro rate
+    # Over-bill unknown models (Opus rate) so the spend cap trips early, not late.
+    return PRICE_TABLE.get(model, (15.00, 75.00))
 
 
 def _today_utc() -> str:

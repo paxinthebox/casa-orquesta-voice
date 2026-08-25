@@ -329,15 +329,23 @@ class Agent:
                 messages=outbound,
             )
 
-            # Hook #5 — charge the tenant.
+            # Hook #5 — charge the tenant. Guard against missing/zero
+            # usage (Fireworks edge cases, SDK version drift) so the
+            # spend cap never silently stops accruing (CLAUDE.md #5).
             if _HOOKS_AVAILABLE:
                 try:
                     usage = getattr(resp, "usage", None)
-                    if usage is not None:
+                    in_tok = getattr(usage, "input_tokens", 0) if usage else 0
+                    out_tok = getattr(usage, "output_tokens", 0) if usage else 0
+                    if in_tok == 0 and out_tok == 0:
+                        print(
+                            f"[agents] WARNING: {self.name} model={self.model} "
+                            f"returned zero usage — spend cap not charged. "
+                            f"Non-negotiable #5 at risk."
+                        )
+                    else:
                         billed = spend_caps.record_usage(
-                            tenant_id, self.model,
-                            getattr(usage, "input_tokens", 0),
-                            getattr(usage, "output_tokens", 0),
+                            tenant_id, self.model, in_tok, out_tok,
                         )
                         ctx.emit("policy", self.name,
                                  {"kind": "policy", "policy": "spend_caps", **billed})
