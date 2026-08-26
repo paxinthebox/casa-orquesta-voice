@@ -126,6 +126,7 @@ Update dockerfile path to `"../../services/voice-gateway/Dockerfile"` (relative 
 - [x] Step 7: Dockerfile — DONE 2026-08-26. Replaced with the build-context version (COPY services/voice-gateway/ + services/_shared/, PYTHONPATH) — mirrors the live orchestrator Dockerfile pattern byte-for-byte.
 - [x] Step 8: fly.voice-gateway.toml — DONE 2026-08-26. Added STT_PROVIDER=google, TTS_PROVIDER=google, GEMINI_TTS_VOICE=Kore. dockerfile path already correct. NOTE: STT_PROVIDER=google is PENDING the service-account decision (below) — if Dario picks B, flip to deepgram. GOOGLE_CLOUD_API_KEY must be added as a fly secret for the voice-gateway app (TTS needs it); GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE secret needed only for option A.
 - [x] Notify lucia for review — SENT 2026-08-26.
+- [x] Review — ACCEPTED by lucia 2026-08-26 (all 9 files, no changes). Lucia commits + deploys. DEPLOY-ORDERING NOTE (flagged to lucia): if the deploy lands before Dario's A/B decision, ship with STT_PROVIDER=deepgram + TTS_PROVIDER=google (STT 401s on google until a service-account secret exists); flip the line when the decision lands.
 
 ## Live verification log (atlas, 2026-08-25)
 
