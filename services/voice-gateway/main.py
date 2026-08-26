@@ -31,7 +31,7 @@ from typing import Optional
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
-from stt.deepgram_client import DeepgramSTT
+from stt.factory import STT_PROVIDER, open_stt
 from tts.factory import open_tts
 from orchestrator_client import OrchestratorStreamClient
 from barge_in import BargeInDetector
@@ -112,7 +112,7 @@ def health():
     from tts.elevenlabs_client import resolve_voice_id
     return {
         "status": "ok",
-        "stt": "deepgram-nova-2-es-mx",
+        "stt": STT_PROVIDER,
         "tts": os.getenv("TTS_PROVIDER", "elevenlabs"),
         "tts_voice_id": resolve_voice_id(TTS_VOICE or None),
         "orchestrator": ORCHESTRATOR_URL,
@@ -201,9 +201,8 @@ async def _run_session(
         # Build a fresh session. Factories defer real network calls
         # until `session.open()`.
         async def stt_factory(on_partial, on_final):
-            return await DeepgramSTT.open(
-                language=STT_LANGUAGE,
-                on_partial=on_partial, on_final=on_final,
+            return await open_stt(
+                STT_LANGUAGE, on_partial, on_final,
             )
 
         async def tts_factory(on_audio):

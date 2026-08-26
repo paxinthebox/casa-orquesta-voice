@@ -16,6 +16,9 @@ kill_timeout = "30s"
   PYTHONUNBUFFERED = "1"
   ORCHESTRATOR_URL = "http://casa-orquesta-orchestrator.internal:8000"
   STT_LANGUAGE = "es-MX"
+  STT_PROVIDER = "google"          # PENDING DARIO: needs GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE secret (Speech API rejects API keys) — see HANDOFF_VOICE_GATEWAY.md
+  TTS_PROVIDER = "google"
+  GEMINI_TTS_VOICE = "Kore"
   TTS_VOICE = "elevenlabs:antoni-multilingual"
 
 [http_service]

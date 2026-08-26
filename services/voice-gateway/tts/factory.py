@@ -4,6 +4,7 @@ TTS provider factory — Phase 2.2.
 Selects the active TTS adapter based on `TTS_PROVIDER` env:
     TTS_PROVIDER=elevenlabs (default) → ElevenLabsTTS
     TTS_PROVIDER=azure                → AzureTTS
+    TTS_PROVIDER=google               → GoogleTTS (Gemini 3.1 Flash TTS)
 
 Both implement TTSProvider, so callers don't change.
 """
@@ -26,6 +27,10 @@ async def open_tts(
     on_audio: Optional[OnAudio] = None,
 ) -> TTSProvider:
     """Open the active TTS provider per `TTS_PROVIDER`."""
+    if TTS_PROVIDER == "google":
+        from .google_tts import GoogleTTS
+
+        return await GoogleTTS.open(voice=voice, on_audio=on_audio)
     if TTS_PROVIDER == "azure":
         return await AzureTTS.open(voice=voice, on_audio=on_audio)
     if ELEVENLABS_TRANSPORT == "rest":
