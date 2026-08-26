@@ -50,6 +50,7 @@ from .interfaces import OnFinal, OnPartial, STTProvider
 GOOGLE_STT_MODEL = os.getenv("GOOGLE_STT_MODEL", "chirp_3")
 GOOGLE_CLOUD_API_KEY = os.getenv("GOOGLE_CLOUD_API_KEY", "")
 GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE", "")
+GOOGLE_CLOUD_PROJECT = os.getenv("GOOGLE_CLOUD_PROJECT", "")
 SAMPLE_RATE_HZ = 16000
 AUDIO_CHANNEL_COUNT = 1
 # Sentinel pushed on the audio queue to close the request stream.
@@ -173,14 +174,21 @@ class GoogleSTT(STTProvider):
         out_q: "queue.Queue" = queue.Queue()
 
         cfg = _streaming_config(language)
+        recognizer_path = (
+            f"projects/{GOOGLE_CLOUD_PROJECT}/locations/global/recognizers/_"
+            if GOOGLE_CLOUD_PROJECT else ""
+        )
 
         def _worker_run() -> None:
             from google.cloud import speech_v2
 
             def requests():
-                yield speech_v2.StreamingRecognizeRequest(
+                first = speech_v2.StreamingRecognizeRequest(
                     streaming_config=cfg
                 )
+                if recognizer_path:
+                    first.recognizer = recognizer_path
+                yield first
                 while True:
                     frame = in_q.get()
                     if frame is _END:
