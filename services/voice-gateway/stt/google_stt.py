@@ -57,18 +57,36 @@ _END = object()
 
 
 def _build_client(api_key: Optional[str] = None) -> tuple[Any, str]:
-    """Build the SpeechClient per the auth chain. Returns (client, mode)."""
+    """Build the SpeechClient per the auth chain. Returns (client, mode).
+
+    Auth chain (first match wins):
+      1. GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE as a file path (if the path exists).
+      2. GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE as inline JSON (if it parses as JSON).
+         This is how Fly secrets deliver it — the env var holds the JSON string,
+         not a path to a file on disk.
+      3. GOOGLE_CLOUD_API_KEY via client_options (currently rejected by the API,
+         kept for forward-compat).
+      4. Application Default Credentials (fallback).
+    """
     from google.cloud import speech_v2
 
-    if GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE and os.path.exists(
-        GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE
-    ):
+    sa_value = GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE
+    if sa_value:
         from google.oauth2 import service_account
 
-        creds = service_account.Credentials.from_service_account_file(
-            GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE
-        )
-        return speech_v2.SpeechClient(credentials=creds), "service-account"
+        # Try as a file path first (local dev).
+        if os.path.exists(sa_value):
+            creds = service_account.Credentials.from_service_account_file(sa_value)
+            return speech_v2.SpeechClient(credentials=creds), "service-account-file"
+        # Try as inline JSON (Fly secrets deliver the JSON string directly).
+        try:
+            import json as _json
+            info = _json.loads(sa_value)
+            if isinstance(info, dict) and "private_key" in info:
+                creds = service_account.Credentials.from_service_account_info(info)
+                return speech_v2.SpeechClient(credentials=creds), "service-account-inline"
+        except (ValueError, TypeError):
+            pass  # Not JSON; fall through to other auth methods.
     key = api_key or GOOGLE_CLOUD_API_KEY
     if key:
         return speech_v2.SpeechClient(client_options={"api_key": key}), "api-key"
