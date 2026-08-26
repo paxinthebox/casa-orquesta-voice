@@ -51,6 +51,8 @@ GOOGLE_STT_MODEL = os.getenv("GOOGLE_STT_MODEL", "chirp_3")
 GOOGLE_CLOUD_API_KEY = os.getenv("GOOGLE_CLOUD_API_KEY", "")
 GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_CLOUD_SERVICE_ACCOUNT_FILE", "")
 GOOGLE_CLOUD_PROJECT = os.getenv("GOOGLE_CLOUD_PROJECT", "")
+# Chirp 3 is only available in "us" and "eu" multi-regions, not "global".
+GOOGLE_STT_REGION = os.getenv("GOOGLE_STT_REGION", "us")
 SAMPLE_RATE_HZ = 16000
 AUDIO_CHANNEL_COUNT = 1
 # Sentinel pushed on the audio queue to close the request stream.
@@ -75,17 +77,22 @@ def _build_client(api_key: Optional[str] = None) -> tuple[Any, str]:
     if sa_value:
         from google.oauth2 import service_account
 
-        # Try as a file path first (local dev).
         if os.path.exists(sa_value):
             creds = service_account.Credentials.from_service_account_file(sa_value)
-            return speech_v2.SpeechClient(credentials=creds), "service-account-file"
+            return speech_v2.SpeechClient(
+                credentials=creds,
+                client_options={"api_endpoint": f"{GOOGLE_STT_REGION}-speech.googleapis.com"},
+            ), "service-account-file"
         # Try as inline JSON (Fly secrets deliver the JSON string directly).
         try:
             import json as _json
             info = _json.loads(sa_value)
             if isinstance(info, dict) and "private_key" in info:
                 creds = service_account.Credentials.from_service_account_info(info)
-                return speech_v2.SpeechClient(credentials=creds), "service-account-inline"
+                return speech_v2.SpeechClient(
+                    credentials=creds,
+                    client_options={"api_endpoint": f"{GOOGLE_STT_REGION}-speech.googleapis.com"},
+                ), "service-account-inline"
         except (ValueError, TypeError):
             pass  # Not JSON; fall through to other auth methods.
     key = api_key or GOOGLE_CLOUD_API_KEY
@@ -175,7 +182,7 @@ class GoogleSTT(STTProvider):
 
         cfg = _streaming_config(language)
         recognizer_path = (
-            f"projects/{GOOGLE_CLOUD_PROJECT}/locations/global/recognizers/_"
+            f"projects/{GOOGLE_CLOUD_PROJECT}/locations/{GOOGLE_STT_REGION}/recognizers/_"
             if GOOGLE_CLOUD_PROJECT else ""
         )
 
